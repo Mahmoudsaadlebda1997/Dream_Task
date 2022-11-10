@@ -13,6 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/countrymodule', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => '','namespace' => 'Api'],function (){
+    Route::group(['prefix' => 'countries'],function (){
+        Route::put('/{id}','CountryApiController@update');//->middleware('auth:admin_api');;
+        Route::get('/','CountryApiController@index');//->middleware('auth:admin_api');
+        Route::post('/create','CountryApiController@create');//->middleware('auth:admin_api');
+        Route::get('/{id}','CountryApiController@find');//->middleware('auth:admin_api');
+        Route::delete('/{id}','CountryApiController@delete');//->middleware('auth:admin_api');
+    });
+    Route::group(['prefix' => 'cities'],function (){
+        Route::put('/{id}','CityApiController@update');//->middleware('auth:admin_api');;
+        Route::get('/','CityApiController@index');//->middleware('auth:admin_api');
+        Route::post('/create','CityApiController@create');//->middleware('auth:admin_api');
+        Route::get('/{id}','CityApiController@find');//->middleware('auth:admin_api');
+        Route::delete('/{id}','CityApiController@delete');//->middleware('auth:admin_api');
+    });
 });

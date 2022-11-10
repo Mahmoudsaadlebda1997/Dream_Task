@@ -13,7 +13,7 @@ trait AdminServiceHelper{
     function validationCreate($data){
         return validator($data,[
             'name'=>'required',
-            'password' =>'required|min:12|confirmed',
+            'password' =>'required|min:6|confirmed',
             'privileges' =>'required',
             'email' => 'required|email|unique:admins,email,id',
         ]);
