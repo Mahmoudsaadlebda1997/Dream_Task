@@ -1,0 +1,13 @@
+{
+    "name": "CountryModule",
+    "alias": "countrymodule",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CountryModule\\Providers\\CountryModuleServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
