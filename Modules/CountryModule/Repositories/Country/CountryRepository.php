@@ -31,11 +31,11 @@ class CountryRepository
     }
     public function find($id){
 
-        return $this->countryModel->whereId($id)->with('cities')->first();
+        return $this->countryModel->whereId($id)->with('cities','users')->first();
 
     }
     public function findByIds($ids){
-        return $this->countryModel->whereIn('id',$ids)->with('cities')->get();
+        return $this->countryModel->whereIn('id',$ids)->with('cities','users')->get();
     }
 
     public function delete($ids){
@@ -44,7 +44,7 @@ class CountryRepository
     }
 
     public function all(array $data){
-        $countries =$this->countryModel->with('cities')->orderBy('id');
+        $countries =$this->countryModel->with('cities','users')->orderBy('id');
         $this->filter($countries, $data);
         return getCaseCollection($countries, $data);
     }

@@ -3,7 +3,7 @@
 namespace Modules\CountryModule\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\AdsModule\Entities\User;
 
 class City extends Model
 {
@@ -11,6 +11,9 @@ class City extends Model
 
     public function country(){
         return $this->belongsTo(Country::class,'country_id');
+    }
+    public function users(){
+        return $this->hasMany(User::class,'city_id');
     }
     public function scopeSearch($query,$term){
         return $query->where(function ($q)use($term){

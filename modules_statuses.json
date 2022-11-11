@@ -1,4 +1,5 @@
 {
     "AdminModule": true,
-    "CountryModule": true
+    "CountryModule": true,
+    "AdsModule": true
 }
