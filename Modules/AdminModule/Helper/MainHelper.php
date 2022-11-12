@@ -60,4 +60,8 @@ function return_response($response)
     }
     return response()->json($response, 400, []);
 }
+function getAuthUser($guard)
+{
+    return auth($guard)->user();
+}
 ?>

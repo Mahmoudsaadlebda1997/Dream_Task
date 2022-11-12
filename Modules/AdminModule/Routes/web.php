@@ -11,6 +11,11 @@
 |
 */
 
-Route::prefix('adminmodule')->group(function() {
-    Route::get('/', 'AdminModuleController@index');
-});
+Route::prefix('')->group(function() {
+    Route::get('login', 'AuthController@index')->name('login');
+    Route::post('post-login', 'AuthController@handleLoginAdmin')->name('login.post');
+    Route::get('logout', 'AuthController@handleLogoutAdmin')->name('logout');
+    Route::get('/', 'AuthController@dashboard')->name('getDashboardHome');
+
+}
+    );
