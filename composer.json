@@ -15,6 +15,7 @@
         "intervention/image": "^2.7",
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
+        "laravelcollective/html": "~6.0",
         "laravolt/avatar": "^4.1",
         "lcobucci/jwt": "3.3.3",
         "nwidart/laravel-modules": "^8.3",

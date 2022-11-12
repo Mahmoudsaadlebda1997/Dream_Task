@@ -3,6 +3,7 @@
 namespace Modules\AdsModule\Services\User;
 
 
+use Illuminate\Validation\Rule;
 use Modules\AdsModule\Entities\User;
 
 trait UserServiceHelper
@@ -23,10 +24,10 @@ trait UserServiceHelper
         return validator($data,[
             'name' => 'required',
             'ads_count' => 'nullable',
-            'email' => 'nullable|email|unique:users,email,id',
+            'email' => ['required', 'email', Rule::unique('users')->ignore($data['id'])],
             'country_id' => 'required|exists:countries,id',
             'city_id' => 'required|exists:cities,id',
-            'id' => 'required|exists:users,id'
+            'id' => 'nullable|exists:users,id'
         ]);
     }
     protected function validationUpdateActivity($data)
