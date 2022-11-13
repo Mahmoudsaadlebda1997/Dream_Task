@@ -16,7 +16,7 @@ function handleExceptionDD($exception)
 function getCaseCollection($builder, array $data)
 {
     if ($data['paginated'] ?? null) {
-        return $builder->paginate($data['limit'] ?? 20);
+        return $builder->paginate($data['limit'] ?? 5);
     }
     return $builder->get();
 }

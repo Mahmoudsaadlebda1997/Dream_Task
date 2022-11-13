@@ -14,7 +14,6 @@ trait UploadHelper
     {
         $file_name =  rand() . time() . '.' . $file->guessExtension();
         $data['name'] = 'uploads/'.$path.'/'.$file_name;
-//        $data['name'] = 'uploads/'.auth('admin_api')->user()->username.'/'.$file_name;
         $data['mime_type'] = $file->getClientMimeType();
         $data['extension'] = $file->getClientOriginalExtension();
         $data['placeholder'] = $file->getClientOriginalName();

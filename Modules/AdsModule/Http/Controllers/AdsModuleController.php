@@ -20,6 +20,7 @@ class AdsModuleController extends Controller
     }
     public function index(Request $request)
     {
+        $request->request->add(['paginated' => 1]);
         $request_data = $request->all();
         $ads = $this->adService->all($request_data)['data'];
         $users= $this->userService->all([])['data'];
