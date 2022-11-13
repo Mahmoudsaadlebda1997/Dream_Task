@@ -52,9 +52,21 @@
                                                 <i class="fa fa-search"></i>
                                                 {{__('trans.filter')}}
                                             </button>
+                                            <div class="card-blue ml-3">
+                                            <a class="fw-bolder" target="_blank" href="{{route('getDownloadFileUserXL')}}">
+                                                <i class="fa fa-download text-primary"></i>
+                                                Download File Sample Excel
+                                            </a>
+                                                <br>
+                                                <a class="fw-bolder" target="_blank" href="{{route('getDownloadFileUserPdf')}}">
+                                                <i class="fa fa-download text-primary"></i>
+                                                Download File Sample PDF
+                                            </a>
                                         </div>
                                     </div>
+                                </div>
                                 </form>
+                            </div>
                                 <a class="btn mt-2 btn-primary"
                                    href="{{route('getCreateUser')}}">{{__('trans.new')}}</a>
                                 </div>
