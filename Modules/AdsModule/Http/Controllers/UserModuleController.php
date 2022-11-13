@@ -48,7 +48,11 @@ class UserModuleController extends Controller
         if (!$user) return back()->with('error', __('trans.not_found'));
         $countries = $this->countryService->all([])['data'];
         $cities = $this->cityService->all([])['data'];
-        return view('adsmodule::User.edit', compact('user', 'countries', 'cities'));
+        $activites =  [
+            0 => 0,
+            1 => 1,
+        ];
+        return view('adsmodule::User.edit', compact('user', 'countries', 'cities','activites'));
     }
     public function update(Request $request, $id)
     {
@@ -61,7 +65,6 @@ class UserModuleController extends Controller
         }
 
     }
-
     public function delete(Request $request)
     {
         $op =$this->userService->delete($request->all());

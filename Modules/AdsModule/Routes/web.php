@@ -28,4 +28,16 @@ Route::group([
         Route::put('/edit/{id}', 'UserModuleController@update')->name('handleEditUser');
         Route::get('/delete', 'UserModuleController@delete')->name('deleteUser');
     });
+         Route::group([
+            'prefix' => 'ads',
+            'middleware' => 'auth:admin',
+        ], function () {
+            Route::get('/', 'AdsModuleController@index')->name('getAllAds');
+            Route::get('/create', 'AdsModuleController@create')->name('getCreateAd');
+            Route::post('/create', 'AdsModuleController@store')->name('handleCreateAd');
+            Route::get('/edit/{id}', 'AdsModuleController@edit')->name('getEditAd');
+            Route::put('/edit/{id}', 'AdsModuleController@update')->name('handleEditAd');
+            Route::get('/delete', 'AdsModuleController@delete')->name('deleteAd');
+        });
+
 });

@@ -26,11 +26,11 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('getAllUsers') }}">*  Users</a>
+                    <a class="nav-link" href="{{ route('getAllUsers') }}">All Users</a>
                 </li>
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" href="{{ route('getAllAds') }}">Ads</a>--}}
-{{--                </li>--}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('getAllAds') }}">All Ads</a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
