@@ -162,6 +162,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+
 
         /*
          * Package Services Providers...
@@ -227,6 +229,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
 
     ],
 

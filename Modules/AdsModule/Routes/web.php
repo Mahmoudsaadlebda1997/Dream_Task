@@ -27,6 +27,9 @@ Route::group([
         Route::get('/edit/{id}', 'UserModuleController@edit')->name('getEditUser');
         Route::put('/edit/{id}', 'UserModuleController@update')->name('handleEditUser');
         Route::get('/delete', 'UserModuleController@delete')->name('deleteUser');
+        Route::get('/getDownloadFileUserXL', 'UserModuleController@getDownloadFileUserXL')->name('getDownloadFileUserXL');
+        Route::get('/exportPDF', 'UserModuleController@exportPDF')->name('getDownloadFileUserPdf');
+
     });
          Route::group([
             'prefix' => 'ads',

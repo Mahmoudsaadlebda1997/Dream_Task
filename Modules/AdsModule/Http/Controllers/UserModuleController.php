@@ -73,4 +73,14 @@ class UserModuleController extends Controller
             return redirect(url('/dashboard/users'));
         }
     }
+    public function getDownloadFileUserXL(Request $request)
+    {
+        return $this->userService->handleExportAdminSample();
+    }
+    public function exportPDF(Request $request)
+    {
+        return $this->userService->exportPDFSample();
+    }
+
+
 }
