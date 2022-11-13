@@ -12,7 +12,7 @@ trait AdServiceHelper
     {
         return validator($data,[
             'title' => 'required',
-            'ad_image' => 'required|image',
+            'ad_image' =>  'required|image',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'user_id' => 'required|exists:users,id',
@@ -22,10 +22,10 @@ trait AdServiceHelper
     {
         return validator($data,[
             'title' => 'required',
-            'ad_image' => 'required|image',
+            'ad_image' => 'nullable|image',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'nullable|exists:users,id',
             'id' => 'required|exists:ads,id'
         ]);
     }
