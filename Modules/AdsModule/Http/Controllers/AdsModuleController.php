@@ -5,75 +5,67 @@ namespace Modules\AdsModule\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\AdsModule\Services\Ad\AdService;
+use Modules\AdsModule\Services\User\UserService;
 
 class AdsModuleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
-    public function index()
-    {
-        return view('adsmodule::index');
-    }
+    protected $userService;
+    protected $adService;
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
+    public function __construct()
+    {
+        $this->userService = new UserService();
+        $this->adService = new AdService();
+    }
+    public function index(Request $request)
+    {
+        $request->request->add(['paginated' => 1]);
+        $request_data = $request->all();
+        $ads = $this->adService->all($request_data)['data'];
+        $users= $this->userService->all([])['data'];
+        return view('adsmodule::Ads.index', compact('users', 'ads'));
+    }
     public function create()
     {
-        return view('adsmodule::create');
+        $users = $this->userService->all([])['data'];
+        return view('adsmodule::Ads.create', compact( 'users'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
     public function store(Request $request)
     {
-        //
+        $op = $this->adService->create($request->all());
+        if ($op) {
+            return redirect(url('/dashboard/ads'));
+        }
+        return back()->withErrors($response['data']['validation_errors'] ?? [])->withInput();
     }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('adsmodule::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
     public function edit($id)
     {
-        return view('adsmodule::edit');
+        $ad = $this->adService->find($id)['data'] ?? null;
+        if (!$ad) return back()->with('error', __('trans.not_found'));
+        $users = $this->userService->all([])['data'];
+        $activites =  [
+            0 => 0,
+            1 => 1,
+        ];
+        return view('adsmodule::Ads.edit', compact('ad', 'users','activites'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $request->request->add(['id' => $id]);
+        $op = $this->adService->update($request->all());
+        if($op){
+            return redirect(url('/dashboard/ads'));
+        }else{
+            return back()->withErrors($response['data']['validation_errors'] ?? [])->withInput();
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
+    }
+    public function delete(Request $request)
     {
-        //
+        $op =$this->adService->delete($request->all());
+        if($op){
+            return redirect(url('/dashboard/ads'));
+        }
     }
 }

@@ -2,6 +2,8 @@
 namespace Modules\AdsModule\Services\User;
 
 use Illuminate\Support\Facades\DB;
+use Modules\AdminModule\Exports\AdminExport;
+use Modules\AdsModule\Exports\UsersExport;
 use Modules\AdsModule\Repositories\User\UserRepository;
 use Modules\AdsModule\Traits\UploadHelper;
 
@@ -134,5 +136,13 @@ class UserService
                 ],
             ]);
         }
+    }
+    public function handleExportAdminSample()
+    {
+        return \Excel::download(new UsersExport(), 'Users.xlsx');
+    }
+    public function exportPDFSample()
+    {
+        return \Excel::download(new UsersExport(), 'Users.pdf');
     }
 }
