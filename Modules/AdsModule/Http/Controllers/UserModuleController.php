@@ -22,6 +22,7 @@ class UserModuleController extends Controller
     }
     public function index(Request $request)
     {
+        $request->request->add(['paginated' => 1]);
         $request_data = $request->all();
         $users = $this->userService->all($request_data)['data'];
         $cities = $this->cityService->all([])['data'];

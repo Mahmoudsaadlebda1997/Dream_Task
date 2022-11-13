@@ -3,6 +3,15 @@
     AllUsers
 @endsection
 @section('css')
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <style>
+        .select2-container .select2-selection--single {
+            height: 43px;
+        }
+    </style>
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <style>
         .select2-container .select2-selection--single {
@@ -21,8 +30,35 @@
                 <div class="row">
                     <div class="col-12 mt-2">
                             <div class="card-body">
-                                <a class="btn btn-primary"
+                                <form action="">
+                                <div class="col-md-4">
+                                    <div class="input-group" dir="ltr">
+                                        <div class="input-group-addon">
+                                            <select id="countries"
+                                                    class="form-control noradius" name="country_id">
+                                                <option value="">All</option>
+                                                @foreach($countries ?? [] as $country)
+                                                    <option @if(request()->country_id == $country->id) selected
+                                                            @endif
+                                                            value="{{$country->id}}">{{$country->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <input type="text" class="form-control input-sm" name="query"
+                                               placeholder="{{__('trans.search')}}"
+                                               value="{{request()->get('query')}}">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-sms btn-info">
+                                                <i class="fa fa-search"></i>
+                                                {{__('trans.filter')}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <a class="btn mt-2 btn-primary"
                                    href="{{route('getCreateUser')}}">{{__('trans.new')}}</a>
+                                </div>
+
                                 <div class="table-responsive">
                                     <table class="table border-danger table-vertical-center" id="table">
                                         <thead>
@@ -89,16 +125,16 @@
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
                                                                 height="24px" viewBox="0 0 24 24" version="1.1">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect x="0" y="0" width="24" height="24"></rect>
-        <path
-            d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z"
-            fill="#000000" fill-rule="nonzero"></path>
-        <path
-            d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z"
-            fill="#000000" opacity="0.3"></path>
-    </g>
-</svg><!--end::Svg Icon--></span>
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                                        <path
+                                                            d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z"
+                                                            fill="#000000" fill-rule="nonzero"></path>
+                                                        <path
+                                                            d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z"
+                                                            fill="#000000" opacity="0.3"></path>
+                                                    </g>
+                                                </svg><!--end::Svg Icon--></span>
                                                         </a>
                                                 </td>
                                                 </td>
@@ -107,6 +143,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                {{$users->appends(request()->input())->links()}}
                             </div>
                         </div>
                     </div>

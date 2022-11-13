@@ -104,6 +104,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                {{$ads->appends(request()->input())->links()}}
                             </div>
                         </div>
                     </div>
